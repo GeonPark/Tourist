@@ -42,8 +42,9 @@
             this.label_selectedPath = new System.Windows.Forms.Label();
             this.TouristTabControl = new System.Windows.Forms.TabControl();
             this.tabMap = new System.Windows.Forms.TabPage();
-            this.tabDetail = new System.Windows.Forms.TabPage();
             this.TouristGmap = new GMap.NET.WindowsForms.GMapControl();
+            this.tabDetail = new System.Windows.Forms.TabPage();
+            this.detailViewLabel = new System.Windows.Forms.Label();
             this.TouristMenu.SuspendLayout();
             this.TouristTabControl.SuspendLayout();
             this.tabMap.SuspendLayout();
@@ -156,16 +157,6 @@
             this.tabMap.Text = "Maps";
             this.tabMap.UseVisualStyleBackColor = true;
             // 
-            // tabDetail
-            // 
-            this.tabDetail.Location = new System.Drawing.Point(4, 24);
-            this.tabDetail.Name = "tabDetail";
-            this.tabDetail.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetail.Size = new System.Drawing.Size(743, 320);
-            this.tabDetail.TabIndex = 1;
-            this.tabDetail.Text = "FileDetail";
-            this.tabDetail.UseVisualStyleBackColor = true;
-            // 
             // TouristGmap
             // 
             this.TouristGmap.Bearing = 0F;
@@ -191,6 +182,26 @@
             this.TouristGmap.TabIndex = 0;
             this.TouristGmap.Zoom = 5D;
             // 
+            // tabDetail
+            // 
+            this.tabDetail.Location = new System.Drawing.Point(4, 24);
+            this.tabDetail.Name = "tabDetail";
+            this.tabDetail.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDetail.Size = new System.Drawing.Size(743, 320);
+            this.tabDetail.TabIndex = 1;
+            this.tabDetail.Text = "FileDetail";
+            this.tabDetail.UseVisualStyleBackColor = true;
+            // 
+            // detailViewLabel
+            // 
+            this.detailViewLabel.AutoSize = true;
+            this.detailViewLabel.Location = new System.Drawing.Point(289, 525);
+            this.detailViewLabel.Name = "detailViewLabel";
+            this.detailViewLabel.Size = new System.Drawing.Size(178, 15);
+            this.detailViewLabel.TabIndex = 5;
+            this.detailViewLabel.Text = "분석 가능한 이미지가 없습니다.";
+            this.detailViewLabel.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -199,9 +210,10 @@
             this.ClientSize = new System.Drawing.Size(778, 668);
             this.Controls.Add(this.label_selectedPath);
             this.Controls.Add(this.label_targetdir);
-            this.Controls.Add(this.detailView);
             this.Controls.Add(this.TouristMenu);
             this.Controls.Add(this.TouristTabControl);
+            this.Controls.Add(this.detailViewLabel);
+            this.Controls.Add(this.detailView);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.MainMenuStrip = this.TouristMenu;
             this.Name = "Main";
@@ -234,6 +246,7 @@
         private System.Windows.Forms.TabPage tabMap;
         private System.Windows.Forms.TabPage tabDetail;
         private GMap.NET.WindowsForms.GMapControl TouristGmap;
+        private System.Windows.Forms.Label detailViewLabel;
     }
 }
 

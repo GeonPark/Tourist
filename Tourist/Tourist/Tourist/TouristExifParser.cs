@@ -8,7 +8,7 @@ namespace Tourist.Tourist
 {
     class TouristExifParser
     {
-
+        
        
     }
 }

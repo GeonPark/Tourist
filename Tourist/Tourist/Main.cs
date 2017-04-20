@@ -29,7 +29,7 @@ namespace Tourist
         {
             // GMap 기본설정
             TouristGmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
             TouristGmap.Position = new GMap.NET.PointLatLng(37.478683, 126.878648);
             
         }
@@ -43,10 +43,14 @@ namespace Tourist
                 {
 
                     Tourist.PropertyFileInfo pf = Tourist.TouristFileInfo.getFileInfo(objFile);
-                    FileListView = new ListViewItem(pf.filename);
-                    FileListView.SubItems.Add("test");
-                    FileListView.SubItems.Add(Tourist.TouristBasicUtil.GetFileSize(pf.filesize));
+                    Tourist.ExifValue ef = Tourist.TouristExifParser.getImageInfo(objFile);
+                    FileListView = new ListViewItem(pf.Filename);
+                    FileListView.SubItems.Add(Tourist.TouristBasicUtil.GetFileSize(pf.Filesize));
+                    FileListView.SubItems.Add(pf.CreateTime.ToString());
+                    FileListView.SubItems.Add(pf.LastWriteTime.ToString());
+                    FileListView.SubItems.Add(pf.LastAccessTime.ToString());
                     detailView.Items.Add(FileListView);
+                    setGMapMarker(ef.Latitue, ef.Longitude);
                 }
             }
             detailView.EndUpdate();
@@ -73,6 +77,27 @@ namespace Tourist
             }
             else
                 MessageBox.Show("분석대상 디렉터리를 지정해주십시오.", "Tourist", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void detailView_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("click");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Tourist.ExifValue ev = Tourist.TouristExifParser.getImageInfo("C:\\Users\\ParkGeon\\Desktop\\testimage\\2.jpg");
+            MessageBox.Show(ev.Latitue.ToString());
+
+        }
+
+        public void setGMapMarker(double lat, double log)
+        {
+            GMap.NET.WindowsForms.GMapOverlay markersOverlay = new GMap.NET.WindowsForms.GMapOverlay("markers");
+            GMap.NET.WindowsForms.Markers.GMarkerGoogle marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(
+                new GMap.NET.PointLatLng(lat, log), GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue);
+            markersOverlay.Markers.Add(marker);
+            TouristGmap.Overlays.Add(markersOverlay);
         }
     }
 }

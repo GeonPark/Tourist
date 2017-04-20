@@ -16,12 +16,15 @@ namespace Tourist.Tourist
             bool result = false;
             if (File.Exists(path))
             {
-                FileStream fs = new FileStream(path, FileMode.Open);
+                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
                 BinaryReader br = new BinaryReader(fs);
-                br.BaseStream.Position = 0;
-                byte[] headers = br.ReadBytes(3);
-                if (headers[0] == 255 && headers[1] == 216 && headers[2] == 255)
-                    result = true;
+                if (fs.Length >= 3)
+                {
+                    br.BaseStream.Position = 0;
+                    byte[] headers = br.ReadBytes(3);
+                    if (headers[0] == 255 && headers[1] == 216 && headers[2] == 255)
+                        result = true;
+                }
                 br.Close();
                 fs.Close();
             }
@@ -42,6 +45,20 @@ namespace Tourist.Tourist
                 size = byteCount.ToString() + " Bytes";
 
             return size;
+        }
+
+        public static double ConvertGPSLocation(string location)
+        {
+            string[] first_data = location.Split(new string[] { "°" }, StringSplitOptions.None);
+            double temp1 = Convert.ToInt32(first_data[0]);
+            
+            char[] split_article = {'\''};
+            string[] second_data = first_data[1].Split(split_article);
+
+            double temp2 = Convert.ToDouble(second_data[0].Trim()) / 60;
+            double temp3 = Convert.ToDouble(second_data[1].Replace("\"", "").Trim()) / 3600;
+
+            return temp1 + temp2 + temp3;
         }
     }
 }

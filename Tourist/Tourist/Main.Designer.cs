@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.detailView = new System.Windows.Forms.ListView();
             this.columnFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnFilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnFileSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TouristMenu = new System.Windows.Forms.MenuStrip();
             this.분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExifLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,39 +43,42 @@
             this.tabMap = new System.Windows.Forms.TabPage();
             this.TouristGmap = new GMap.NET.WindowsForms.GMapControl();
             this.tabDetail = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabSetting = new System.Windows.Forms.TabPage();
             this.detailViewLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnCreateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnLastWriteTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnLastAccessTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TouristMenu.SuspendLayout();
             this.TouristTabControl.SuspendLayout();
             this.tabMap.SuspendLayout();
+            this.tabDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // detailView
             // 
             this.detailView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnFileName,
-            this.columnFilePath,
-            this.columnFileSize});
+            this.columnSize,
+            this.columnCreateTime,
+            this.columnLastWriteTime,
+            this.columnLastAccessTime});
             this.detailView.Location = new System.Drawing.Point(12, 396);
             this.detailView.Name = "detailView";
             this.detailView.Size = new System.Drawing.Size(754, 260);
             this.detailView.TabIndex = 0;
             this.detailView.UseCompatibleStateImageBehavior = false;
             this.detailView.View = System.Windows.Forms.View.Details;
+            this.detailView.Click += new System.EventHandler(this.detailView_Click);
             // 
             // columnFileName
             // 
             this.columnFileName.Text = "파일이름";
             this.columnFileName.Width = 120;
-            // 
-            // columnFilePath
-            // 
-            this.columnFilePath.Text = "파일경로";
-            this.columnFilePath.Width = 250;
-            // 
-            // columnFileSize
-            // 
-            this.columnFileSize.Text = "파일사이즈";
-            this.columnFileSize.Width = 150;
             // 
             // TouristMenu
             // 
@@ -107,7 +109,8 @@
             // 도움말ToolStripMenuItem
             // 
             this.도움말ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DeveloperToolStripMenuItem});
+            this.DeveloperToolStripMenuItem,
+            this.gitHubToolStripMenuItem});
             this.도움말ToolStripMenuItem.Name = "도움말ToolStripMenuItem";
             this.도움말ToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.도움말ToolStripMenuItem.Text = "도움말";
@@ -115,7 +118,7 @@
             // DeveloperToolStripMenuItem
             // 
             this.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem";
-            this.DeveloperToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.DeveloperToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.DeveloperToolStripMenuItem.Text = "Credit";
             this.DeveloperToolStripMenuItem.Click += new System.EventHandler(this.DeveloperToolStripMenuItem_Click);
             // 
@@ -131,7 +134,7 @@
             // label_selectedPath
             // 
             this.label_selectedPath.AutoSize = true;
-            this.label_selectedPath.Location = new System.Drawing.Point(129, 314);
+            this.label_selectedPath.Location = new System.Drawing.Point(134, 378);
             this.label_selectedPath.Name = "label_selectedPath";
             this.label_selectedPath.Size = new System.Drawing.Size(0, 15);
             this.label_selectedPath.TabIndex = 3;
@@ -140,7 +143,8 @@
             // 
             this.TouristTabControl.Controls.Add(this.tabMap);
             this.TouristTabControl.Controls.Add(this.tabDetail);
-            this.TouristTabControl.Location = new System.Drawing.Point(15, 27);
+            this.TouristTabControl.Controls.Add(this.tabSetting);
+            this.TouristTabControl.Location = new System.Drawing.Point(12, 27);
             this.TouristTabControl.Name = "TouristTabControl";
             this.TouristTabControl.SelectedIndex = 0;
             this.TouristTabControl.Size = new System.Drawing.Size(751, 348);
@@ -184,6 +188,7 @@
             // 
             // tabDetail
             // 
+            this.tabDetail.Controls.Add(this.pictureBox1);
             this.tabDetail.Location = new System.Drawing.Point(4, 24);
             this.tabDetail.Name = "tabDetail";
             this.tabDetail.Padding = new System.Windows.Forms.Padding(3);
@@ -191,6 +196,24 @@
             this.tabDetail.TabIndex = 1;
             this.tabDetail.Text = "FileDetail";
             this.tabDetail.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(231, 236);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // tabSetting
+            // 
+            this.tabSetting.Location = new System.Drawing.Point(4, 24);
+            this.tabSetting.Name = "tabSetting";
+            this.tabSetting.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSetting.Size = new System.Drawing.Size(743, 320);
+            this.tabSetting.TabIndex = 2;
+            this.tabSetting.Text = "설정";
+            this.tabSetting.UseVisualStyleBackColor = true;
             // 
             // detailViewLabel
             // 
@@ -202,6 +225,42 @@
             this.detailViewLabel.Text = "분석 가능한 이미지가 없습니다.";
             this.detailViewLabel.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(510, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 48);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // gitHubToolStripMenuItem
+            // 
+            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
+            this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gitHubToolStripMenuItem.Text = "GitHub";
+            // 
+            // columnSize
+            // 
+            this.columnSize.Text = "파일크기";
+            this.columnSize.Width = 80;
+            // 
+            // columnCreateTime
+            // 
+            this.columnCreateTime.Text = "최초 생성 시간";
+            this.columnCreateTime.Width = 170;
+            // 
+            // columnLastWriteTime
+            // 
+            this.columnLastWriteTime.Text = "마지막 수정시간";
+            this.columnLastWriteTime.Width = 170;
+            // 
+            // columnLastAccessTime
+            // 
+            this.columnLastAccessTime.Text = "마지막 접근시간";
+            this.columnLastAccessTime.Width = 170;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -209,12 +268,14 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(778, 668);
             this.Controls.Add(this.label_selectedPath);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label_targetdir);
             this.Controls.Add(this.TouristMenu);
             this.Controls.Add(this.TouristTabControl);
             this.Controls.Add(this.detailViewLabel);
             this.Controls.Add(this.detailView);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.TouristMenu;
             this.Name = "Main";
             this.Text = "Tourist - JPG Image Extractor";
@@ -223,6 +284,8 @@
             this.TouristMenu.PerformLayout();
             this.TouristTabControl.ResumeLayout(false);
             this.tabMap.ResumeLayout(false);
+            this.tabDetail.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,8 +295,6 @@
 
         private System.Windows.Forms.ListView detailView;
         private System.Windows.Forms.ColumnHeader columnFileName;
-        private System.Windows.Forms.ColumnHeader columnFilePath;
-        private System.Windows.Forms.ColumnHeader columnFileSize;
         private System.Windows.Forms.MenuStrip TouristMenu;
         private System.Windows.Forms.ToolStripMenuItem 분석ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExifLoadToolStripMenuItem;
@@ -247,6 +308,14 @@
         private System.Windows.Forms.TabPage tabDetail;
         private GMap.NET.WindowsForms.GMapControl TouristGmap;
         private System.Windows.Forms.Label detailViewLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TabPage tabSetting;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem gitHubToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnSize;
+        private System.Windows.Forms.ColumnHeader columnCreateTime;
+        private System.Windows.Forms.ColumnHeader columnLastWriteTime;
+        private System.Windows.Forms.ColumnHeader columnLastAccessTime;
     }
 }
 

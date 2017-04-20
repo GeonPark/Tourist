@@ -13,10 +13,14 @@ namespace Tourist.Tourist
         public static PropertyFileInfo getFileInfo(string filePath)
         {
             PropertyFileInfo pf = new PropertyFileInfo();
-            pf.filename = Path.GetFileName(filePath);
 
             FileInfo fi = new FileInfo(filePath);
-            pf.filesize = fi.Length;
+            pf.Filesize = fi.Length;
+            pf.CreateTime = fi.CreationTime;
+            pf.LastAccessTime = fi.LastAccessTime;
+            pf.LastWriteTime = fi.LastWriteTime;
+            pf.Filename = Path.GetFileName(filePath);
+
             return pf;
         }
         
@@ -24,8 +28,12 @@ namespace Tourist.Tourist
 
     public class PropertyFileInfo
     {
-        public string filename { get; set; }
-        public long filesize { get; set; }
+        public string Filename { get; set; }
+        public long Filesize { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime LastAccessTime { get; set; }
+        public DateTime LastWriteTime { get; set; }
+
 
     }
 }

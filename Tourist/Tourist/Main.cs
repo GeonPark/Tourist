@@ -27,15 +27,17 @@ namespace Tourist
 
         private void Main_Load(object sender, EventArgs e)
         {
-            // GMap 기본설정
-            TouristGmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-            TouristGmap.Position = new GMap.NET.PointLatLng(37.478683, 126.878648);
-            
+            InitGMap();
         }
         private void setImageListView(string[] filelist)
         {
-            //detailView.Clear();
+            // 리스트뷰 초기화
+            detailView.Items.Clear();
+
+            // GMap 초기화
+            TouristGmap.Overlays.Clear();
+            InitGMap();
+
             foreach (string objFile in filelist)
             {
                 // Exif Format을 가진 이미지파일만 작업 수행
@@ -50,9 +52,11 @@ namespace Tourist
                     FileListView.SubItems.Add(pf.LastWriteTime.ToString());
                     FileListView.SubItems.Add(pf.LastAccessTime.ToString());
                     detailView.Items.Add(FileListView);
-                    setGMapMarker(ef.Latitue, ef.Longitude);
+                    setGMapMarker(ef.Latitue, ef.Longitude, pf.Filename);
                 }
             }
+            // 초기 Marker가 겹치는 현상때문에 Zoom으로 맵리로딩
+            TouristGmap.Zoom = 6;
             detailView.EndUpdate();
             if (detailView.Items.Count == 0)
                 detailViewLabel.Visible = true;
@@ -86,18 +90,39 @@ namespace Tourist
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Tourist.ExifValue ev = Tourist.TouristExifParser.getImageInfo("C:\\Users\\ParkGeon\\Desktop\\testimage\\2.jpg");
-            MessageBox.Show(ev.Latitue.ToString());
+            TouristGmap.Overlays.Clear();
+            InitGMap();
 
         }
 
-        public void setGMapMarker(double lat, double log)
+        #region GMap 설정관련 메소드
+        public void InitGMap()
+        {
+            // GMap 기본설정
+            TouristGmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            TouristGmap.Position = new GMap.NET.PointLatLng(37.478683, 126.878648);
+            TouristGmap.DragButton = System.Windows.Forms.MouseButtons.Left;
+        }
+
+        public void setGMapMarker(double lat, double log, string filename)
         {
             GMap.NET.WindowsForms.GMapOverlay markersOverlay = new GMap.NET.WindowsForms.GMapOverlay("markers");
             GMap.NET.WindowsForms.Markers.GMarkerGoogle marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(
                 new GMap.NET.PointLatLng(lat, log), GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue);
+
+
+            // Marker Tooltip 
+            marker.ToolTipText = filename;
+            marker.ToolTip.Fill = Brushes.White;
+            marker.ToolTip.Foreground = Brushes.Black;
+            marker.ToolTip.Stroke = Pens.Black;
+            marker.ToolTip.TextPadding = new Size(20, 10);
+            marker.ToolTipMode = GMap.NET.WindowsForms.MarkerTooltipMode.OnMouseOver;
+
             markersOverlay.Markers.Add(marker);
             TouristGmap.Overlays.Add(markersOverlay);
         }
+        #endregion
     }
 }

@@ -31,11 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.detailView = new System.Windows.Forms.ListView();
             this.columnFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnCreateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnLastWriteTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnLastAccessTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TouristMenu = new System.Windows.Forms.MenuStrip();
             this.분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExifLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도움말ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeveloperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TouristDirBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.label_targetdir = new System.Windows.Forms.Label();
             this.label_selectedPath = new System.Windows.Forms.Label();
@@ -47,11 +52,6 @@
             this.tabSetting = new System.Windows.Forms.TabPage();
             this.detailViewLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.columnSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnCreateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnLastWriteTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnLastAccessTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TouristMenu.SuspendLayout();
             this.TouristTabControl.SuspendLayout();
             this.tabMap.SuspendLayout();
@@ -79,6 +79,26 @@
             // 
             this.columnFileName.Text = "파일이름";
             this.columnFileName.Width = 120;
+            // 
+            // columnSize
+            // 
+            this.columnSize.Text = "파일크기";
+            this.columnSize.Width = 80;
+            // 
+            // columnCreateTime
+            // 
+            this.columnCreateTime.Text = "최초 생성 시간";
+            this.columnCreateTime.Width = 170;
+            // 
+            // columnLastWriteTime
+            // 
+            this.columnLastWriteTime.Text = "마지막 수정시간";
+            this.columnLastWriteTime.Width = 170;
+            // 
+            // columnLastAccessTime
+            // 
+            this.columnLastAccessTime.Text = "마지막 접근시간";
+            this.columnLastAccessTime.Width = 170;
             // 
             // TouristMenu
             // 
@@ -118,9 +138,15 @@
             // DeveloperToolStripMenuItem
             // 
             this.DeveloperToolStripMenuItem.Name = "DeveloperToolStripMenuItem";
-            this.DeveloperToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.DeveloperToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.DeveloperToolStripMenuItem.Text = "Credit";
             this.DeveloperToolStripMenuItem.Click += new System.EventHandler(this.DeveloperToolStripMenuItem_Click);
+            // 
+            // gitHubToolStripMenuItem
+            // 
+            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
+            this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.gitHubToolStripMenuItem.Text = "GitHub";
             // 
             // label_targetdir
             // 
@@ -171,7 +197,7 @@
             this.TouristGmap.LevelsKeepInMemmory = 5;
             this.TouristGmap.Location = new System.Drawing.Point(3, 3);
             this.TouristGmap.MarkersEnabled = true;
-            this.TouristGmap.MaxZoom = 10;
+            this.TouristGmap.MaxZoom = 30;
             this.TouristGmap.MinZoom = 2;
             this.TouristGmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             this.TouristGmap.Name = "TouristGmap";
@@ -235,32 +261,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // gitHubToolStripMenuItem
-            // 
-            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
-            this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.gitHubToolStripMenuItem.Text = "GitHub";
-            // 
-            // columnSize
-            // 
-            this.columnSize.Text = "파일크기";
-            this.columnSize.Width = 80;
-            // 
-            // columnCreateTime
-            // 
-            this.columnCreateTime.Text = "최초 생성 시간";
-            this.columnCreateTime.Width = 170;
-            // 
-            // columnLastWriteTime
-            // 
-            this.columnLastWriteTime.Text = "마지막 수정시간";
-            this.columnLastWriteTime.Width = 170;
-            // 
-            // columnLastAccessTime
-            // 
-            this.columnLastAccessTime.Text = "마지막 접근시간";
-            this.columnLastAccessTime.Width = 170;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -278,7 +278,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.TouristMenu;
             this.Name = "Main";
-            this.Text = "Tourist - JPG Image Extractor";
+            this.Text = "Tourist - Image Analyzer";
             this.Load += new System.EventHandler(this.Main_Load);
             this.TouristMenu.ResumeLayout(false);
             this.TouristMenu.PerformLayout();

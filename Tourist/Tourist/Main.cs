@@ -19,6 +19,7 @@ namespace Tourist
         private Tourist.TouristSetting settings;
         private string selectedPath = "";
         private ListViewItem FileListView;
+        private List<Tourist.ExifValue> result;
         public Main()
         {
             InitializeComponent();
@@ -31,6 +32,9 @@ namespace Tourist
         }
         private void setImageListView(string[] filelist)
         {
+            // 이미지 분석결과값 리스트 초기화
+            result = new List<Tourist.ExifValue>();
+
             // 리스트뷰 초기화
             detailView.Items.Clear();
 
@@ -46,13 +50,16 @@ namespace Tourist
 
                     Tourist.PropertyFileInfo pf = Tourist.TouristFileInfo.getFileInfo(objFile);
                     Tourist.ExifValue ef = Tourist.TouristExifParser.getImageInfo(objFile);
+                    
                     FileListView = new ListViewItem(pf.Filename);
                     FileListView.SubItems.Add(Tourist.TouristBasicUtil.GetFileSize(pf.Filesize));
                     FileListView.SubItems.Add(pf.CreateTime.ToString());
                     FileListView.SubItems.Add(pf.LastWriteTime.ToString());
                     FileListView.SubItems.Add(pf.LastAccessTime.ToString());
                     detailView.Items.Add(FileListView);
+
                     setGMapMarker(ef.Latitue, ef.Longitude, pf.Filename);
+                    result.Add(ef);
                 }
             }
             // 초기 Marker가 겹치는 현상때문에 Zoom으로 맵리로딩
@@ -62,6 +69,17 @@ namespace Tourist
                 detailViewLabel.Visible = true;
             else
                 detailViewLabel.Visible = false;
+        }
+
+        private void setFileDetailView(string fn)
+        {
+            // 분석결과값 리스트에서 파라미터로 받은 파일네임을 검색하여 인덱스를 알아낸 뒤,
+            // 해당 인덱스의 저장된 분석결과 프로퍼티를 가져온다.
+            int pfIndex = result.FindIndex(ev => ev.Filename == fn);
+            Tourist.ExifValue itemResult = result[pfIndex];
+
+            imageViewer.ImageLocation = selectedPath + "\\" + itemResult.Filename;
+            imageViewer.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void DeveloperToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,13 +103,13 @@ namespace Tourist
 
         private void detailView_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("click");
+            int itemindex = detailView.FocusedItem.Index;
+            string selectFilename = detailView.Items[itemindex].SubItems[0].Text;
+            setFileDetailView(selectFilename);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TouristGmap.Overlays.Clear();
-            InitGMap();
 
         }
 
@@ -103,6 +121,7 @@ namespace Tourist
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
             TouristGmap.Position = new GMap.NET.PointLatLng(37.478683, 126.878648);
             TouristGmap.DragButton = System.Windows.Forms.MouseButtons.Left;
+            TouristGmap.Zoom = 5;
         }
 
         public void setGMapMarker(double lat, double log, string filename)

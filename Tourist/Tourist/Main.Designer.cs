@@ -48,15 +48,17 @@
             this.tabMap = new System.Windows.Forms.TabPage();
             this.TouristGmap = new GMap.NET.WindowsForms.GMapControl();
             this.tabDetail = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.imageViewer = new System.Windows.Forms.PictureBox();
             this.tabSetting = new System.Windows.Forms.TabPage();
             this.detailViewLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.grp_ImageViewer = new System.Windows.Forms.GroupBox();
             this.TouristMenu.SuspendLayout();
             this.TouristTabControl.SuspendLayout();
             this.tabMap.SuspendLayout();
             this.tabDetail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageViewer)).BeginInit();
+            this.grp_ImageViewer.SuspendLayout();
             this.SuspendLayout();
             // 
             // detailView
@@ -214,7 +216,7 @@
             // 
             // tabDetail
             // 
-            this.tabDetail.Controls.Add(this.pictureBox1);
+            this.tabDetail.Controls.Add(this.grp_ImageViewer);
             this.tabDetail.Location = new System.Drawing.Point(4, 24);
             this.tabDetail.Name = "tabDetail";
             this.tabDetail.Padding = new System.Windows.Forms.Padding(3);
@@ -223,13 +225,13 @@
             this.tabDetail.Text = "FileDetail";
             this.tabDetail.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // imageViewer
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(231, 236);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.imageViewer.Location = new System.Drawing.Point(15, 22);
+            this.imageViewer.Name = "imageViewer";
+            this.imageViewer.Size = new System.Drawing.Size(235, 257);
+            this.imageViewer.TabIndex = 0;
+            this.imageViewer.TabStop = false;
             // 
             // tabSetting
             // 
@@ -261,6 +263,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // grp_ImageViewer
+            // 
+            this.grp_ImageViewer.Controls.Add(this.imageViewer);
+            this.grp_ImageViewer.Location = new System.Drawing.Point(15, 12);
+            this.grp_ImageViewer.Name = "grp_ImageViewer";
+            this.grp_ImageViewer.Size = new System.Drawing.Size(267, 296);
+            this.grp_ImageViewer.TabIndex = 1;
+            this.grp_ImageViewer.TabStop = false;
+            this.grp_ImageViewer.Text = "이미지 뷰어";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -285,7 +297,8 @@
             this.TouristTabControl.ResumeLayout(false);
             this.tabMap.ResumeLayout(false);
             this.tabDetail.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageViewer)).EndInit();
+            this.grp_ImageViewer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,7 +321,7 @@
         private System.Windows.Forms.TabPage tabDetail;
         private GMap.NET.WindowsForms.GMapControl TouristGmap;
         private System.Windows.Forms.Label detailViewLabel;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox imageViewer;
         private System.Windows.Forms.TabPage tabSetting;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem gitHubToolStripMenuItem;
@@ -316,6 +329,7 @@
         private System.Windows.Forms.ColumnHeader columnCreateTime;
         private System.Windows.Forms.ColumnHeader columnLastWriteTime;
         private System.Windows.Forms.ColumnHeader columnLastAccessTime;
+        private System.Windows.Forms.GroupBox grp_ImageViewer;
     }
 }
 
